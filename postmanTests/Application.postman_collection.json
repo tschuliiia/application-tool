@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "f5b0411f-e412-49fa-9927-12e1690e7052",
+		"name": "Application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/applicants/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"applicants",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get first",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/applicants/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"applicants",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Education of 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/applicants/1/education",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"applicants",
+						"1",
+						"education"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Job Experience of 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/applicants/1/education",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"applicants",
+						"1",
+						"education"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Certificates of 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/applicants/1/certificates",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"applicants",
+						"1",
+						"certificates"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
