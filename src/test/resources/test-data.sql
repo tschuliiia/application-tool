@@ -33,7 +33,7 @@ INSERT INTO certificate (applicant_id, name, description)
 VALUES (1, 'SAP Hybris', 'Base Commerce Training');
 
 INSERT INTO Applicant(first_name, last_name, email, birth_date, hobbies)
-VALUES ('Max', 'Mustermann', 'max.mustermann@gmail.com', '2022-02-22',
+VALUES ('Maxi', 'Mustermann', 'max.mustermann@gmail.com', '2022-02-22',
         'Sports, Cinema');
 INSERT INTO Applicant_languages(applicant_id, language)
 VALUES (2, 'GERMAN');
