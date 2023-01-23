@@ -59,6 +59,9 @@ public class Applicant implements Serializable {
     @Email(message = "The email address must be valid")
     private String email;
 
+    @Column(name = "experience_points")
+    private Integer experiencePoints;
+
     @OneToMany(mappedBy = "applicantId", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<JobExperience> jobExperiences;
 

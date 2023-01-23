@@ -102,6 +102,83 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Add Applicant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Popeye\",\n    \"lastName\": \"The Sailor\",\n    \"languages\": [\n        \"ENGLISH\",\n        \"SPANISH\"\n    ],\n    \"birthDate\": \"1980-01-20\",\n    \"hobbies\": \"Eating Spinach\",\n    \"email\": \"popeye@gmail.com\",\n    \"jobExperiences\": [\n        {\n            \"company\": \"Company\",\n            \"position\": \"Employee\",\n            \"startDate\": \"2010-08\",\n            \"endDate\": \"2015-06\",\n            \"tasks\": \"Working for the company\"\n        }\n    ],\n    \"educationList\": [\n        {\n            \"educationalInstitution\": \"University\",\n            \"specification\": \"General\",\n            \"startDate\": \"2005-09\",\n            \"endDate\": \"208-07\",\n            \"educationLevel\": \"BACHELOR\"\n        }\n    ],\n    \"certificateList\": [\n        {\n            \"name\": \"Certificate 1\",\n            \"description\": \"Certified Person\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/applicants/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"applicants",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fightBattle",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " [\n        1,\n        2\n    ]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/battles/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"battles",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get LeadershipBoard",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/battles/leadershipBoard",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"battles",
+						"leadershipBoard"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

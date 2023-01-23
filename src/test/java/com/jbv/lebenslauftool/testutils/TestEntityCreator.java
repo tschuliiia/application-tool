@@ -25,6 +25,7 @@ public class TestEntityCreator {
                         .educationList(List.of(buildEducation()))
                         .jobExperiences(List.of(buildJobExperience()))
                         .certificateList(List.of(buildCertificate()))
+                        .experiencePoints(0)
                         .build();
     }
 
@@ -33,10 +34,11 @@ public class TestEntityCreator {
                         .firstName("Maria")
                         .lastName("Musterfrau")
                         .languages(Set.of(Language.ENGLISH))
+                        .experiencePoints(0)
                         .build();
     }
 
-    private static Education buildEducation() {
+    public static Education buildEducation() {
         return Education.builder()
                         .educationLevel(EducationLevel.BACHELOR)
                         .educationalInstitution("FH Joanneum")

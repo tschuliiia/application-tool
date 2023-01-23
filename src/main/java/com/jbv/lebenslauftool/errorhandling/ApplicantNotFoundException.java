@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ApplicantNotFoundException extends RuntimeException {
     public ApplicantNotFoundException(Long id) {
-        super("Could not find employee " + id);
+        super("Could not find applicant " + id);
     }
 }

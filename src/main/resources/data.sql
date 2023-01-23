@@ -39,3 +39,45 @@ INSERT INTO Applicant_languages(applicant_id, language)
 VALUES (2, 'GERMAN');
 INSERT INTO Applicant_languages(applicant_id, language)
 VALUES (2, 'ENGLISH');
+
+INSERT INTO Applicant(first_name, last_name, email, birth_date, hobbies)
+VALUES ('Micky', 'Mouse', 'micky.mouse@gmail.com', '1980-02-22',
+        'Sports, reading');
+INSERT INTO Applicant_languages(applicant_id, language)
+VALUES (3, 'GERMAN');
+INSERT INTO Applicant_languages(applicant_id, language)
+VALUES (3, 'ENGLISH');
+
+INSERT INTO certificate (applicant_id, name, description)
+VALUES (3, 'Certificate 1', 'Certified Person');
+INSERT INTO certificate (applicant_id, name, description)
+VALUES (3, 'Certificate 2', 'Certified Person');
+
+INSERT INTO job_experience (applicant_id, company, position, start_date, end_date, tasks)
+VALUES (3, 'Company', 'Employee', '2010-09-01', '2019-10-01',
+        'Working for the Company');
+INSERT INTO education (applicant_id, educational_institution, specification, education_level, start_date, end_date)
+VALUES (3, 'University', 'Master degree', 'MASTER', '2015-09-01', '2020-01-01');
+INSERT INTO education (applicant_id, educational_institution, specification, education_level, start_date, end_date)
+VALUES (3, 'University', 'Bachelor degree', 'MASTER', '2012-09-01', '2012-09-01');
+
+INSERT INTO Applicant(first_name, last_name, email, birth_date, hobbies)
+VALUES ('Minnie', 'Mouse', 'minnie.mouse@gmail.com', '1982-02-22',
+        'Sports, reading');
+INSERT INTO Applicant_languages(applicant_id, language)
+VALUES (4, 'GERMAN');
+INSERT INTO Applicant_languages(applicant_id, language)
+VALUES (4, 'ENGLISH');
+
+INSERT INTO certificate (applicant_id, name, description)
+VALUES (4, 'Certificate 1', 'Certified Person');
+
+INSERT INTO job_experience (applicant_id, company, position, start_date, end_date, tasks)
+VALUES (4, 'Company', 'Employee', '2008-09-01', '2010-10-01',
+        'Working for the Company');
+INSERT INTO education (applicant_id, educational_institution, specification, education_level, start_date, end_date)
+VALUES (4, 'University', 'Master degree', 'PHD', '2020-01-01', '2023-01-01');
+INSERT INTO education (applicant_id, educational_institution, specification, education_level, start_date, end_date)
+VALUES (4, 'University', 'Master degree', 'MASTER', '2015-09-01', '2020-01-01');
+INSERT INTO education (applicant_id, educational_institution, specification, education_level, start_date, end_date)
+VALUES (4, 'University', 'Bachelor degree', 'MASTER', '2012-09-01', '2012-09-01');
