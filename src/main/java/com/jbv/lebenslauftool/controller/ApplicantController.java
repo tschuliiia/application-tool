@@ -80,13 +80,13 @@ public class ApplicantController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     Applicant replaceApplicant(@RequestBody Applicant applicant, @PathVariable Long id) {
-        return applicantRepository.findById(id).map(Applicant -> {
-            Applicant.setFirstName(applicant.getFirstName());
-            Applicant.setLastName(applicant.getLastName());
-            Applicant.setBirthDate(applicant.getBirthDate());
-            Applicant.setEmail(applicant.getEmail());
-            Applicant.setHobbies(applicant.getHobbies());
-            return applicantRepository.save(Applicant);
+        return applicantRepository.findById(id).map(updatedApplicant -> {
+            updatedApplicant.setFirstName(applicant.getFirstName());
+            updatedApplicant.setLastName(applicant.getLastName());
+            updatedApplicant.setBirthDate(applicant.getBirthDate());
+            updatedApplicant.setEmail(applicant.getEmail());
+            updatedApplicant.setHobbies(applicant.getHobbies());
+            return applicantRepository.save(updatedApplicant);
         }).orElseThrow(() -> new ApplicantNotFoundException(id));
     }
 

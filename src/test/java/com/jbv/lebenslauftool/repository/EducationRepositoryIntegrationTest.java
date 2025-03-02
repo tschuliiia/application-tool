@@ -19,20 +19,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @AutoConfigureTestDatabase
 @ActiveProfiles("test")
-public class EducationRepositoryIntegrationTest {
+class EducationRepositoryIntegrationTest {
 
     @Autowired
     private EducationRepository educationRepository;
 
 
     @Test
-    public void whenFindByApplicantId_thenReturnEducation() {
+    void whenFindByApplicantId_thenReturnEducation() {
         List<Education> result = educationRepository.findByApplicantId(1L);
-        assertThat(result.size()).isEqualTo(3);
+        assertThat(result).hasSize(3);
     }
 
     @Test
-    public void whenInvalidApplicantId_thenReturnNull() {
+    void whenInvalidApplicantId_thenReturnNull() {
         List<Education> fromDb = educationRepository.findByApplicantId(10L);
         assertThat(fromDb).isEmpty();
     }

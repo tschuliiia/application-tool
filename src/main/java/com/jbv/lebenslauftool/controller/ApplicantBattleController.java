@@ -20,9 +20,9 @@ import java.util.Objects;
 public class ApplicantBattleController {
 
     @Resource(name = "battleService")
-    private BattleService battleService;
+    private final BattleService battleService;
 
-    private ApplicantRepository applicantRepository;
+    private final ApplicantRepository applicantRepository;
 
 
     public  ApplicantBattleController(BattleService battleService, ApplicantRepository applicantRepository) {

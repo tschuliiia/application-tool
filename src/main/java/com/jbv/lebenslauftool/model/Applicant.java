@@ -49,7 +49,7 @@ public class Applicant implements Serializable {
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "applicant_languages")
     @Column(name = "language")
-    Collection<Language> languages;
+    private Collection<Language> languages;
 
     @Column(name = "birth_date")
     private LocalDate birthDate;

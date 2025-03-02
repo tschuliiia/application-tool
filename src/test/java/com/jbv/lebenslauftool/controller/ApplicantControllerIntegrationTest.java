@@ -19,6 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Objects;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -26,16 +28,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest(classes = LebenslaufToolApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase
 @ActiveProfiles("test")
-public class ApplicantControllerIntegrationTest {
+class ApplicantControllerIntegrationTest {
     @LocalServerPort
     private int port;
 
-    TestRestTemplate restTemplate = new TestRestTemplate();
+    final TestRestTemplate restTemplate = new TestRestTemplate();
 
-    HttpHeaders headers = new HttpHeaders();
+    final HttpHeaders headers = new HttpHeaders();
 
     @Test
-    public void testRetrieveCertificatesForApplicant() throws JSONException {
+    void testRetrieveCertificatesForApplicant() throws JSONException {
 
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
 
@@ -49,7 +51,7 @@ public class ApplicantControllerIntegrationTest {
     }
 
     @Test
-    public void testRetrieveBasicApplicant() throws JSONException {
+    void testRetrieveBasicApplicant() throws JSONException {
 
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
 
@@ -66,7 +68,7 @@ public class ApplicantControllerIntegrationTest {
     }
 
     @Test
-    public void testAddApplicantWithDetails() {
+    void testAddApplicantWithDetails() {
         Applicant applicant = TestEntityCreator.buildApplicantWithDetails();
         HttpEntity<Applicant> entity = new HttpEntity<>(applicant, headers);
 
@@ -74,7 +76,7 @@ public class ApplicantControllerIntegrationTest {
                 String.class);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertTrue(response.getBody()
+        assertTrue(Objects.requireNonNull(response.getBody())
                            .contains("\"firstName\":\"Max\",\"lastName\":\"Mustermann\""));
         assertTrue(response.getBody()
                            .contains(
@@ -92,7 +94,7 @@ public class ApplicantControllerIntegrationTest {
     }
 
     @Test
-    public void testAddBasicApplicant() {
+    void testAddBasicApplicant() {
         Applicant applicant = TestEntityCreator.buildBasicApplicant();
         HttpEntity<Applicant> entity = new HttpEntity<>(applicant, headers);
 
@@ -100,7 +102,7 @@ public class ApplicantControllerIntegrationTest {
                 String.class);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertTrue(response.getBody()
+        assertTrue(Objects.requireNonNull(response.getBody())
                            .contains("\"firstName\":\"Maria\",\"lastName\":\"Musterfrau\""));
         assertTrue(response.getBody()
                            .contains("\"educationList\":null"));

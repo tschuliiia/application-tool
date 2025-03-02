@@ -16,25 +16,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DataJpaTest
 @AutoConfigureTestDatabase
 @ActiveProfiles("test")
-public class ApplicantRepositoryIntegrationTest {
+class ApplicantRepositoryIntegrationTest {
 
     @Autowired
     private ApplicantRepository applicantRepository;
 
     @Test
-    public void testUpdateExperiencePoints() {
+    void testUpdateExperiencePoints() {
         applicantRepository.updateExperiencePoints(1L, 5);
 
         var result = applicantRepository.findById(1L);
+        //noinspection OptionalGetWithoutIsPresent
         assertEquals(5, result.get().getExperiencePoints());
     }
 
     @Test
-    public void testGetLeadershipBoard() {
+    void testGetLeadershipBoard() {
         applicantRepository.updateExperiencePoints(1L, 5);
 
         var result = applicantRepository.getLeadershipBoard();
-        assertEquals(1L, result.get(0).getId());
-        assertEquals(5, result.get(0).getExperiencePoints());
+        assertEquals(1L, result.getFirst().id());
+        assertEquals(5, result.getFirst().experiencePoints());
     }
 }

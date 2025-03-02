@@ -10,7 +10,7 @@ import com.jbv.lebenslauftool.repositories.ApplicantRepository;
 import org.springframework.stereotype.Component;
 
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -18,7 +18,8 @@ import java.util.Random;
 @Component("battleService")
 public class BattleService {
 
-    private ApplicantRepository applicantRepository;
+    private final ApplicantRepository applicantRepository;
+    private final Random rand = new Random();
 
     public BattleService(ApplicantRepository applicantRepository) {
         this.applicantRepository = applicantRepository;
@@ -32,16 +33,15 @@ public class BattleService {
         var applicant2 = applicantRepository.findById(applicantId2)
                                             .orElseThrow(() -> new ApplicantNotFoundException(applicantId2));
 
-        var skill_applicant1 = calculateSkillLevel(applicant1);
-        var skill_applicant2 = calculateSkillLevel(applicant2);
+        var skillApplicant1 = calculateSkillLevel(applicant1);
+        var skillApplicant2 = calculateSkillLevel(applicant2);
 
-        Random rand = new Random();
         int upperbound = 6;
-        int int_random1 = rand.nextInt(upperbound);
-        int int_random2 = rand.nextInt(upperbound);
+        int intRandom1 = this.rand.nextInt(upperbound);
+        int intRandom2 = this.rand.nextInt(upperbound);
 
         Applicant winner;
-        if (skill_applicant1 + int_random1 > skill_applicant2 + int_random2) {
+        if (skillApplicant1 + intRandom1 > skillApplicant2 + intRandom2) {
             winner =  applicant1;
         } else {
             winner =  applicant2;
@@ -55,7 +55,7 @@ public class BattleService {
 
     protected int calculateSkillLevel(Applicant applicant) {
         int skillevel = 0;
-        Map<EducationLevel, Integer> map = new HashMap<>();
+        Map<EducationLevel, Integer> map = new EnumMap<>(EducationLevel.class);
         map.put(EducationLevel.HIGH_SCHOOL, 2);
         map.put(EducationLevel.BACHELOR, 3);
         map.put(EducationLevel.MASTER, 3);
@@ -73,7 +73,7 @@ public class BattleService {
 
         if (applicant.getJobExperiences() != null) {
             for (JobExperience jobExperience : applicant.getJobExperiences()) {
-                skillevel += ChronoUnit.YEARS.between(jobExperience.getStartDate(), jobExperience.getEndDate());
+                skillevel += (int) ChronoUnit.YEARS.between(jobExperience.getStartDate(), jobExperience.getEndDate());
             }
         }
 

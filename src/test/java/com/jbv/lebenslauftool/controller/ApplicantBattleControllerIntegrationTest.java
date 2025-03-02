@@ -16,6 +16,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,16 +25,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest(classes = LebenslaufToolApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase
 @ActiveProfiles("test")
-public class ApplicantBattleControllerIntegrationTest {
+class ApplicantBattleControllerIntegrationTest {
     @LocalServerPort
     private int port;
 
-    TestRestTemplate restTemplate = new TestRestTemplate();
+    final TestRestTemplate restTemplate = new TestRestTemplate();
 
-    HttpHeaders headers = new HttpHeaders();
+    final HttpHeaders headers = new HttpHeaders();
 
     @Test
-    public void testLeadershipBoard() {
+    void testLeadershipBoard() {
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
 
         ResponseEntity<String> response = restTemplate.exchange(createTestURL("/battles/leadershipBoard"),
@@ -41,11 +42,11 @@ public class ApplicantBattleControllerIntegrationTest {
 
         String expected = "\"id\":3,\"firstName\":\"Micky\",\"lastName\":\"Mouse\"";
 
-        assertTrue(response.getBody().contains(expected));
+        assertTrue(Objects.requireNonNull(response.getBody()).contains(expected));
     }
 
     @Test
-    public void testAddBasicApplicant() {
+    void testAddBasicApplicant() {
         HttpEntity<List<Long>> entity = new HttpEntity<>(List.of(2L, 4L), headers);
 
         ResponseEntity<String> response = restTemplate.exchange(createTestURL("/battles/"), HttpMethod.POST, entity,
@@ -53,7 +54,7 @@ public class ApplicantBattleControllerIntegrationTest {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
 
-        assertEquals(response.getBody(), "{\"id\":4,\"name\":\"Minnie\",\"experiencePoints\":1}");
+        assertEquals( "{\"id\":4,\"name\":\"Minnie\",\"experiencePoints\":1}", response.getBody());
     }
 
     private String createTestURL(String uri) {

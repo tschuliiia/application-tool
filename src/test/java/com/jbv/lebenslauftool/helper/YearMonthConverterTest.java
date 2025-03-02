@@ -9,32 +9,32 @@ import java.time.YearMonth;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class YearMonthConverterTest {
+class YearMonthConverterTest {
 
     private final YearMonthConverter yearMonthConverter = new YearMonthConverter();
 
     @Test
-    public void convertToDatabaseColumn_test() {
+    void convertToDatabaseColumn_test() {
         YearMonth yearMonth = YearMonth.of(2022, 10);
         var result = yearMonthConverter.convertToDatabaseColumn(yearMonth);
         assertEquals(LocalDate.of(2022, 10, 1), result);
     }
 
     @Test
-    public void convertToDatabaseColumnNullValue_test() {
+    void convertToDatabaseColumnNullValue_test() {
         var result = yearMonthConverter.convertToDatabaseColumn(null);
         assertNull(result);
     }
 
     @Test
-    public void convertToEntityAttribute_test() {
+    void convertToEntityAttribute_test() {
         LocalDate localDate = LocalDate.of(2022, 10, 1);
         var result = yearMonthConverter.convertToEntityAttribute(localDate);
         assertEquals(YearMonth.of(2022, 10), result);
     }
 
     @Test
-    public void convertToEntityAttributeWithNullValue_test() {
+    void convertToEntityAttributeWithNullValue_test() {
         var result = yearMonthConverter.convertToEntityAttribute(null);
         assertNull(result);
     }

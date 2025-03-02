@@ -4,6 +4,7 @@ import com.jbv.lebenslauftool.errorhandling.BadRequestException;
 import com.jbv.lebenslauftool.model.Winner;
 import com.jbv.lebenslauftool.repositories.ApplicantRepository;
 import com.jbv.lebenslauftool.services.BattleService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
-public class ApplicantBattleControllerTest {
+class ApplicantBattleControllerTest {
     @Mock
     BattleService battleService;
 
@@ -27,18 +28,23 @@ public class ApplicantBattleControllerTest {
     @InjectMocks
     ApplicantBattleController applicantBattleController;
 
+    private AutoCloseable closeable;
+
 
     @BeforeEach
     public void beforeEach() {
-        MockitoAnnotations.initMocks(this);
+        closeable = MockitoAnnotations.openMocks(this);
         applicantBattleController = new ApplicantBattleController(battleService, applicantRepository);
     }
 
+    @AfterEach
+    public void afterEach() throws Exception {
+        closeable.close();
+    }
+
     @Test
-    public void testFightBattleWith3Ids() {
-        Exception exception = assertThrows(BadRequestException.class, () -> {
-            applicantBattleController.fightBattle(List.of(1L, 2L, 3L));
-        });
+    void testFightBattleWith3Ids() {
+        Exception exception = assertThrows(BadRequestException.class, () -> applicantBattleController.fightBattle(List.of(1L, 2L, 3L)));
 
         String expectedMessage = "Only 2 Applicant can battle against each other.";
 
@@ -46,10 +52,8 @@ public class ApplicantBattleControllerTest {
     }
 
     @Test
-    public void testFightBattleWith2equalIds() {
-        Exception exception = assertThrows(BadRequestException.class, () -> {
-            applicantBattleController.fightBattle(List.of(1L, 1L));
-        });
+    void testFightBattleWith2equalIds() {
+        Exception exception = assertThrows(BadRequestException.class, () -> applicantBattleController.fightBattle(List.of(1L, 1L)));
 
         String expectedMessage = "An Applicant can't battle against him/herself.";
 
@@ -57,7 +61,7 @@ public class ApplicantBattleControllerTest {
     }
 
     @Test
-    public void testFightBattle() {
+    void testFightBattle() {
         when(battleService.fightBattle(anyLong(), anyLong())).thenReturn(new Winner(1L, "Lena", 7));
 
         var result = applicantBattleController.fightBattle(List.of(1L, 2L));
