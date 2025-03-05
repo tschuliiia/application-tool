@@ -6,6 +6,7 @@ import com.jbv.lebenslauftool.model.helper.LeaderShipBoardEntry;
 import com.jbv.lebenslauftool.repositories.ApplicantRepository;
 import com.jbv.lebenslauftool.services.BattleService;
 import jakarta.annotation.Resource;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Objects;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/battles")
 public class ApplicantBattleController {
@@ -23,12 +25,6 @@ public class ApplicantBattleController {
     private final BattleService battleService;
 
     private final ApplicantRepository applicantRepository;
-
-
-    public  ApplicantBattleController(BattleService battleService, ApplicantRepository applicantRepository) {
-        this.battleService = battleService;
-        this.applicantRepository = applicantRepository;
-    }
 
     @PostMapping("/")
     Winner fightBattle(@RequestBody List<Long> ids) {

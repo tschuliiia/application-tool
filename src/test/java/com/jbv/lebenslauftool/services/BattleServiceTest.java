@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
- class BattleServiceTest {
+class BattleServiceTest {
 
     @Mock
     ApplicantRepository applicantRepository;
@@ -31,18 +31,18 @@ import static org.mockito.Mockito.when;
     private AutoCloseable closeable;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         closeable = MockitoAnnotations.openMocks(this);
         battleService = new BattleService(applicantRepository);
     }
 
-     @AfterEach
-     public void afterEach() throws Exception {
-         closeable.close();
-     }
+    @AfterEach
+    public void afterEach() throws Exception {
+        closeable.close();
+    }
 
     @Test
-    void testFightBattle(){
+    void testFightBattle() {
         Applicant applicant1 = TestEntityCreator.buildApplicantWithDetails();
         applicant1.setId(1L);
         Education education = TestEntityCreator.buildEducation();
@@ -72,7 +72,7 @@ import static org.mockito.Mockito.when;
     }
 
     @Test
-    void testCalculateSkillLevel(){
+    void testCalculateSkillLevel() {
         Applicant applicant = TestEntityCreator.buildApplicantWithDetails();
         Applicant basicApplicant = TestEntityCreator.buildBasicApplicant();
 

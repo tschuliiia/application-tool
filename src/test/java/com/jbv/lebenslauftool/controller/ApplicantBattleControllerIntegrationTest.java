@@ -26,12 +26,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @AutoConfigureTestDatabase
 @ActiveProfiles("test")
 class ApplicantBattleControllerIntegrationTest {
-    @LocalServerPort
-    private int port;
-
     final TestRestTemplate restTemplate = new TestRestTemplate();
 
     final HttpHeaders headers = new HttpHeaders();
+
+    @LocalServerPort
+    private int port;
 
     @Test
     void testLeadershipBoard() {
@@ -42,7 +42,8 @@ class ApplicantBattleControllerIntegrationTest {
 
         String expected = "\"id\":3,\"firstName\":\"Micky\",\"lastName\":\"Mouse\"";
 
-        assertTrue(Objects.requireNonNull(response.getBody()).contains(expected));
+        assertTrue(Objects.requireNonNull(response.getBody())
+                          .contains(expected));
     }
 
     @Test
@@ -54,7 +55,7 @@ class ApplicantBattleControllerIntegrationTest {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
 
-        assertEquals( "{\"id\":4,\"name\":\"Minnie\",\"experiencePoints\":1}", response.getBody());
+        assertEquals("{\"id\":4,\"name\":\"Minnie\",\"experiencePoints\":1}", response.getBody());
     }
 
     private String createTestURL(String uri) {

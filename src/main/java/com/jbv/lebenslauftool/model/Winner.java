@@ -10,6 +10,5 @@ public class Winner {
 
     private String name;
 
-    private  Integer experiencePoints;
-
+    private Integer experiencePoints;
 }

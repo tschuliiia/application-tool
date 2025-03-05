@@ -7,6 +7,7 @@ import com.jbv.lebenslauftool.model.EducationLevel;
 import com.jbv.lebenslauftool.model.JobExperience;
 import com.jbv.lebenslauftool.model.Winner;
 import com.jbv.lebenslauftool.repositories.ApplicantRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.temporal.ChronoUnit;
@@ -14,16 +15,13 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Random;
 
-
+@AllArgsConstructor
 @Component("battleService")
 public class BattleService {
 
     private final ApplicantRepository applicantRepository;
     private final Random rand = new Random();
 
-    public BattleService(ApplicantRepository applicantRepository) {
-        this.applicantRepository = applicantRepository;
-    }
 
     public Winner fightBattle(Long applicantId1, Long applicantId2) {
 
@@ -42,9 +40,9 @@ public class BattleService {
 
         Applicant winner;
         if (skillApplicant1 + intRandom1 > skillApplicant2 + intRandom2) {
-            winner =  applicant1;
+            winner = applicant1;
         } else {
-            winner =  applicant2;
+            winner = applicant2;
         }
         winner.setExperiencePoints(winner.getExperiencePoints() + 1);
         applicantRepository.updateExperiencePoints(winner.getId(), winner.getExperiencePoints());
@@ -60,7 +58,7 @@ public class BattleService {
         map.put(EducationLevel.BACHELOR, 3);
         map.put(EducationLevel.MASTER, 3);
         map.put(EducationLevel.PHD, 3);
-        if (applicant.getEducationList()!= null) {
+        if (applicant.getEducationList() != null) {
             for (Education education : applicant.getEducationList()) {
                 skillevel += map.get(education.getEducationLevel());
             }

@@ -27,7 +27,8 @@ class ApplicantRepositoryIntegrationTest {
 
         var result = applicantRepository.findById(1L);
         //noinspection OptionalGetWithoutIsPresent
-        assertEquals(5, result.get().getExperiencePoints());
+        assertEquals(5, result.get()
+                              .getExperiencePoints());
     }
 
     @Test
@@ -35,7 +36,9 @@ class ApplicantRepositoryIntegrationTest {
         applicantRepository.updateExperiencePoints(1L, 5);
 
         var result = applicantRepository.getLeadershipBoard();
-        assertEquals(1L, result.getFirst().id());
-        assertEquals(5, result.getFirst().experiencePoints());
+        assertEquals(1L, result.getFirst()
+                               .id());
+        assertEquals(5, result.getFirst()
+                              .experiencePoints());
     }
 }

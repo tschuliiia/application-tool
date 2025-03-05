@@ -29,12 +29,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @AutoConfigureTestDatabase
 @ActiveProfiles("test")
 class ApplicantControllerIntegrationTest {
-    @LocalServerPort
-    private int port;
-
     final TestRestTemplate restTemplate = new TestRestTemplate();
 
     final HttpHeaders headers = new HttpHeaders();
+
+    @LocalServerPort
+    private int port;
 
     @Test
     void testRetrieveCertificatesForApplicant() throws JSONException {
@@ -77,7 +77,7 @@ class ApplicantControllerIntegrationTest {
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertTrue(Objects.requireNonNull(response.getBody())
-                           .contains("\"firstName\":\"Max\",\"lastName\":\"Mustermann\""));
+                          .contains("\"firstName\":\"Max\",\"lastName\":\"Mustermann\""));
         assertTrue(response.getBody()
                            .contains(
                                    "\"jobExperiences\":[{\"company\":\"TestCompany\"," + "\"position\":\"Developer\"," +
@@ -103,7 +103,7 @@ class ApplicantControllerIntegrationTest {
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertTrue(Objects.requireNonNull(response.getBody())
-                           .contains("\"firstName\":\"Maria\",\"lastName\":\"Musterfrau\""));
+                          .contains("\"firstName\":\"Maria\",\"lastName\":\"Musterfrau\""));
         assertTrue(response.getBody()
                            .contains("\"educationList\":null"));
         assertTrue(response.getBody()

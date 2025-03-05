@@ -9,6 +9,7 @@ import com.jbv.lebenslauftool.repositories.ApplicantRepository;
 import com.jbv.lebenslauftool.repositories.CertificateRepository;
 import com.jbv.lebenslauftool.repositories.EducationRepository;
 import com.jbv.lebenslauftool.repositories.JobExperienceRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/applicants")
 public class ApplicantController {
@@ -33,14 +35,6 @@ public class ApplicantController {
     private final JobExperienceRepository jobExperienceRepository;
 
     private final CertificateRepository certificateRepository;
-
-    ApplicantController(ApplicantRepository applicantRepository, EducationRepository educationRepository,
-                        JobExperienceRepository jobExperienceRepository, CertificateRepository certificateRepository) {
-        this.applicantRepository = applicantRepository;
-        this.educationRepository = educationRepository;
-        this.jobExperienceRepository = jobExperienceRepository;
-        this.certificateRepository = certificateRepository;
-    }
 
 
     @GetMapping("/")
@@ -58,7 +52,8 @@ public class ApplicantController {
     @GetMapping("/{id}")
     Applicant getApplicant(@PathVariable Long id) {
 
-        return applicantRepository.findById(id).orElseThrow(() -> new ApplicantNotFoundException(id));
+        return applicantRepository.findById(id)
+                                  .orElseThrow(() -> new ApplicantNotFoundException(id));
     }
 
     @GetMapping("/{id}/education")
@@ -80,14 +75,16 @@ public class ApplicantController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     Applicant replaceApplicant(@RequestBody Applicant applicant, @PathVariable Long id) {
-        return applicantRepository.findById(id).map(updatedApplicant -> {
-            updatedApplicant.setFirstName(applicant.getFirstName());
-            updatedApplicant.setLastName(applicant.getLastName());
-            updatedApplicant.setBirthDate(applicant.getBirthDate());
-            updatedApplicant.setEmail(applicant.getEmail());
-            updatedApplicant.setHobbies(applicant.getHobbies());
-            return applicantRepository.save(updatedApplicant);
-        }).orElseThrow(() -> new ApplicantNotFoundException(id));
+        return applicantRepository.findById(id)
+                                  .map(updatedApplicant -> {
+                                      updatedApplicant.setFirstName(applicant.getFirstName());
+                                      updatedApplicant.setLastName(applicant.getLastName());
+                                      updatedApplicant.setBirthDate(applicant.getBirthDate());
+                                      updatedApplicant.setEmail(applicant.getEmail());
+                                      updatedApplicant.setHobbies(applicant.getHobbies());
+                                      return applicantRepository.save(updatedApplicant);
+                                  })
+                                  .orElseThrow(() -> new ApplicantNotFoundException(id));
     }
 
     @DeleteMapping("/{id}")

@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class LebenslaufToolApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(LebenslaufToolApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(LebenslaufToolApplication.class, args);
+    }
 
 }

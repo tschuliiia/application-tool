@@ -39,6 +39,13 @@ public class JobExperience implements Serializable {
     @NotNull
     String position;
 
+    String tasks;
+
+    @Getter(AccessLevel.NONE)
+    @Column(name = "applicant_id")
+    @NotNull
+    Long applicantId;
+
     @Column(name = "start_date", columnDefinition = "date")
     @Convert(converter = YearMonthConverter.class)
     private YearMonth startDate;
@@ -46,11 +53,4 @@ public class JobExperience implements Serializable {
     @Column(name = "end_date", columnDefinition = "date")
     @Convert(converter = YearMonthConverter.class)
     private YearMonth endDate;
-
-    String tasks;
-
-    @Getter(AccessLevel.NONE)
-    @Column(name = "applicant_id")
-    @NotNull
-    Long applicantId;
 }
