@@ -78,19 +78,16 @@ class ApplicantControllerIntegrationTest {
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertTrue(Objects.requireNonNull(response.getBody())
                           .contains("\"firstName\":\"Max\",\"lastName\":\"Mustermann\""));
+
+        assertTrue(response.getBody()
+                           .contains("\"jobExperiences\":[{\"company\":\"TestCompany\",\"position\":\"Developer\"," +
+                                   "\"tasks\":\"Develop Software\",\"startDate\":\"2012-09\",\"endDate\":\"2015-06\"}]"));
+        assertTrue(response.getBody()
+                           .contains("\"educationList\":[{\"educationalInstitution\":\"FH Joanneum\",\"specification\":" +
+                                   "\"Software Design\",\"educationLevel\":\"BACHELOR\",\"startDate\":\"2012-09\",\"endDate\":\"2015-06\"}]"));
         assertTrue(response.getBody()
                            .contains(
-                                   "\"jobExperiences\":[{\"company\":\"TestCompany\"," + "\"position\":\"Developer\"," +
-                                           "\"startDate\":\"2012-09\",\"endDate\":\"2015-06\",\"tasks\":\"Develop " + "Software\"}]"));
-        assertTrue(response.getBody()
-                           .contains(
-                                   "\"educationList\":[{\"educationalInstitution\":\"FH Joanneum\"," +
-                                           "\"specification\":\"Software Design\",\"startDate\":\"2012-09\"," +
-                                           "\"endDate\":\"2015-06\"," + "\"educationLevel\":\"BACHELOR\"}]"));
-        assertTrue(response.getBody()
-                           .contains(
-                                   "\"certificateList\":[{\"name\":\"TestCertificate\"," + "\"description\":\"for " +
-                                           "Programming\"}]"));
+                                   "\"certificateList\":[{\"name\":\"TestCertificate\"," + "\"description\":\"for Programming\"}]"));
     }
 
     @Test
