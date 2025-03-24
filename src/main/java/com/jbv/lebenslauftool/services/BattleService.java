@@ -11,8 +11,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.temporal.ChronoUnit;
-import java.util.EnumMap;
-import java.util.Map;
 import java.util.Random;
 
 @AllArgsConstructor
@@ -53,14 +51,9 @@ public class BattleService {
 
     protected int calculateSkillLevel(Applicant applicant) {
         int skillevel = 0;
-        Map<EducationLevel, Integer> map = new EnumMap<>(EducationLevel.class);
-        map.put(EducationLevel.HIGH_SCHOOL, 2);
-        map.put(EducationLevel.BACHELOR, 3);
-        map.put(EducationLevel.MASTER, 3);
-        map.put(EducationLevel.PHD, 3);
         if (applicant.getEducationList() != null) {
             for (Education education : applicant.getEducationList()) {
-                skillevel += map.get(education.getEducationLevel());
+                skillevel += getEducationLevelValue(education.getEducationLevel());
             }
         }
 
@@ -77,5 +70,12 @@ public class BattleService {
 
         skillevel += applicant.getExperiencePoints();
         return skillevel;
+    }
+
+    private int getEducationLevelValue(EducationLevel educationLevel) {
+        return switch (educationLevel) {
+            case HIGH_SCHOOL -> 2;
+            case BACHELOR, MASTER, PHD -> 3;
+        };
     }
 }

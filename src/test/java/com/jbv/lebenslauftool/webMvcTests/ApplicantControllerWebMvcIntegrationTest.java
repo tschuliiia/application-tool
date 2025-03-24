@@ -39,7 +39,7 @@ class ApplicantControllerWebMvcIntegrationTest {
     @Autowired
     private MockMvc mvc;
 
-    ObjectMapper objectMapper = new ObjectMapper();
+    final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
     void testRetrieveBasicApplicant() throws Exception {
