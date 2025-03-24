@@ -31,13 +31,13 @@ class BattleServiceTest {
     private AutoCloseable closeable;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         closeable = MockitoAnnotations.openMocks(this);
         battleService = new BattleService(applicantRepository);
     }
 
     @AfterEach
-    public void afterEach() throws Exception {
+    void afterEach() throws Exception {
         closeable.close();
     }
 

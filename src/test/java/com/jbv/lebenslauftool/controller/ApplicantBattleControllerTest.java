@@ -32,13 +32,13 @@ class ApplicantBattleControllerTest {
 
 
     @BeforeEach
-    public void beforeEach() {
+    void beforeEach() {
         closeable = MockitoAnnotations.openMocks(this);
         applicantBattleController = new ApplicantBattleController(battleService, applicantRepository);
     }
 
     @AfterEach
-    public void afterEach() throws Exception {
+    void afterEach() throws Exception {
         closeable.close();
     }
 
