@@ -5,11 +5,12 @@ import com.jbv.lebenslauftool.model.Applicant;
 import com.jbv.lebenslauftool.testutils.TestEntityCreator;
 import org.json.JSONException;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.skyscreamer.jsonassert.JSONAssert;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -17,18 +18,17 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = LebenslaufToolApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase
+@AutoConfigureTestRestTemplate
 @ActiveProfiles("test")
 class ApplicantControllerIntegrationTest {
+    @Autowired
     final TestRestTemplate restTemplate = new TestRestTemplate();
 
     final HttpHeaders headers = new HttpHeaders();
@@ -77,8 +77,9 @@ class ApplicantControllerIntegrationTest {
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertTrue(Objects.requireNonNull(response.getBody())
-                          .contains("\"firstName\":\"Max\",\"lastName\":\"Mustermann\""));
-
+                          .contains("\"firstName\":\"Max\""));
+        assertTrue(Objects.requireNonNull(response.getBody())
+                          .contains("\"lastName\":\"Mustermann\""));
         assertTrue(response.getBody()
                            .contains("\"jobExperiences\":[{\"company\":\"TestCompany\",\"position\":\"Developer\"," +
                                    "\"tasks\":\"Develop Software\",\"startDate\":\"2012-09\",\"endDate\":\"2015-06\"}]"));
@@ -100,7 +101,9 @@ class ApplicantControllerIntegrationTest {
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertTrue(Objects.requireNonNull(response.getBody())
-                          .contains("\"firstName\":\"Maria\",\"lastName\":\"Musterfrau\""));
+                          .contains("\"firstName\":\"Maria\""));
+        assertTrue(Objects.requireNonNull(response.getBody())
+                          .contains("\"lastName\":\"Musterfrau\""));
         assertTrue(response.getBody()
                            .contains("\"educationList\":null"));
         assertTrue(response.getBody()
