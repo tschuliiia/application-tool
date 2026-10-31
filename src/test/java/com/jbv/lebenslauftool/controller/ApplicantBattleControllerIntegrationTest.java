@@ -44,7 +44,7 @@ class ApplicantBattleControllerIntegrationTest {
     }
 
     @Test
-    void testAddBasicApplicant() {
+    void testFightBattle() {
         HttpEntity<List<Long>> entity = new HttpEntity<>(List.of(2L, 4L), headers);
 
         ResponseEntity<String> response = restTemplate.exchange(createTestURL("/battles/"), HttpMethod.POST, entity,

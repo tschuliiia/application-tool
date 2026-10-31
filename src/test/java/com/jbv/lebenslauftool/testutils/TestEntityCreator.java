@@ -29,6 +29,22 @@ public class TestEntityCreator {
                         .build();
     }
 
+    public static Applicant buildApplicantMaxMustermann() {
+        return Applicant.builder()
+                        .id(2L)
+                        .firstName("Maxi")
+                        .lastName("Mustermann")
+                        .birthDate(LocalDate.of(2022, 2, 22))
+                        .email("max.mustermann@gmail.com")
+                        .hobbies("Sports, Cinema")
+                        .languages(Set.of(Language.GERMAN, Language.ENGLISH))
+                        .educationList(List.of())
+                        .jobExperiences(List.of())
+                        .certificateList(List.of())
+                        .experiencePoints(0)
+                        .build();
+    }
+
     public static Applicant buildBasicApplicant() {
         return Applicant.builder()
                         .firstName("Maria")

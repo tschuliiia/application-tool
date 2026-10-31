@@ -9,12 +9,13 @@ import com.jbv.lebenslauftool.model.Winner;
 import com.jbv.lebenslauftool.repositories.ApplicantRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
 @AllArgsConstructor
-@Component("battleService")
+@Service("battleService")
 public class BattleService {
 
     private final ApplicantRepository applicantRepository;

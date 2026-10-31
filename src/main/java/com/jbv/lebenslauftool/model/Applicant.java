@@ -24,8 +24,8 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -54,7 +54,7 @@ public class Applicant implements Serializable {
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "applicant_languages")
     @Column(name = "language")
-    private Collection<Language> languages;
+    private Set<Language> languages;
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
@@ -76,7 +76,7 @@ public class Applicant implements Serializable {
     @OneToMany(mappedBy = "applicantId", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Certificate> certificateList;
 
-    public Applicant(String firstName, String lastName, Collection<Language> languages) {
+    public Applicant(String firstName, String lastName, Set<Language> languages) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.languages = languages;

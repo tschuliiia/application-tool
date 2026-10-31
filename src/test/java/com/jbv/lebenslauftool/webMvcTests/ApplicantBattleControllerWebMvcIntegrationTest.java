@@ -56,7 +56,7 @@ class ApplicantBattleControllerWebMvcIntegrationTest {
     }
 
     @Test
-    void testAddBasicApplicant() throws Exception {
+    void testFightBattle() throws Exception {
         String entity = objectMapper.writeValueAsString(List.of(2L, 4L));
 
         mvc.perform(post("/battles/")
