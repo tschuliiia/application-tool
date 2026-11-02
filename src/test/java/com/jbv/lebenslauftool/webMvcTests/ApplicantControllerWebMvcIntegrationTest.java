@@ -1,7 +1,6 @@
 package com.jbv.lebenslauftool.webMvcTests;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import tools.jackson.databind.json.JsonMapper;
 import com.jbv.lebenslauftool.LebenslaufToolApplication;
 import com.jbv.lebenslauftool.model.Applicant;
 import com.jbv.lebenslauftool.testutils.TestEntityCreator;
@@ -10,7 +9,7 @@ import org.hamcrest.core.IsNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
@@ -39,7 +38,8 @@ class ApplicantControllerWebMvcIntegrationTest {
     @Autowired
     private MockMvc mvc;
 
-    final ObjectMapper objectMapper = new ObjectMapper();
+    // Jackson 3 supports java.time types (LocalDate, YearMonth) out of the box
+    final JsonMapper objectMapper = JsonMapper.builder().build();
 
     @Test
     void testRetrieveBasicApplicant() throws Exception {
@@ -94,7 +94,6 @@ class ApplicantControllerWebMvcIntegrationTest {
     void testAddApplicantWithDetails() throws Exception {
         Applicant applicant = TestEntityCreator.buildApplicantWithDetails();
 
-        objectMapper.registerModule(new JavaTimeModule());
         String entity = objectMapper.writeValueAsString(applicant);
 
         String response = mvc.perform(post("/applicants/")

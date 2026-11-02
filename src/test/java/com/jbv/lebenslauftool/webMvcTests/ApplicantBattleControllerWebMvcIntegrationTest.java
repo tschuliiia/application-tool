@@ -1,14 +1,14 @@
 package com.jbv.lebenslauftool.webMvcTests;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.CollectionType;
+import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.databind.type.CollectionType;
 import com.jbv.lebenslauftool.LebenslaufToolApplication;
 import com.jbv.lebenslauftool.model.helper.LeaderShipBoardEntry;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
@@ -38,7 +38,7 @@ class ApplicantBattleControllerWebMvcIntegrationTest {
     @Autowired
     private MockMvc mvc;
 
-    final ObjectMapper objectMapper = new ObjectMapper();
+    final JsonMapper objectMapper = JsonMapper.builder().build();
 
 
     @Test
