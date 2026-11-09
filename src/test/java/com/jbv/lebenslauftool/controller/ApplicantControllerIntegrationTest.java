@@ -7,9 +7,9 @@ import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.skyscreamer.jsonassert.JSONAssert;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -68,7 +68,7 @@ class ApplicantControllerIntegrationTest {
     }
 
     @Test
-    void testAddApplicantWithDetails() {
+    void testAddApplicantWithDetails() throws JSONException {
         Applicant applicant = TestEntityCreator.buildApplicantWithDetails();
         HttpEntity<Applicant> entity = new HttpEntity<>(applicant, headers);
 
@@ -76,8 +76,7 @@ class ApplicantControllerIntegrationTest {
                 String.class);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertTrue(Objects.requireNonNull(response.getBody())
-                          .contains("\"firstName\":\"Max\",\"lastName\":\"Mustermann\""));
+        JSONAssert.assertEquals("{\"firstName\":\"Max\",\"lastName\":\"Mustermann\"}", response.getBody(), false);
 
         assertTrue(response.getBody()
                            .contains("\"jobExperiences\":[{\"company\":\"TestCompany\",\"position\":\"Developer\"," +
@@ -91,7 +90,7 @@ class ApplicantControllerIntegrationTest {
     }
 
     @Test
-    void testAddBasicApplicant() {
+    void testAddBasicApplicant() throws JSONException {
         Applicant applicant = TestEntityCreator.buildBasicApplicant();
         HttpEntity<Applicant> entity = new HttpEntity<>(applicant, headers);
 
@@ -99,8 +98,7 @@ class ApplicantControllerIntegrationTest {
                 String.class);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertTrue(Objects.requireNonNull(response.getBody())
-                          .contains("\"firstName\":\"Maria\",\"lastName\":\"Musterfrau\""));
+        JSONAssert.assertEquals("{\"firstName\":\"Maria\",\"lastName\":\"Musterfrau\"}", response.getBody(), false);
         assertTrue(response.getBody()
                            .contains("\"educationList\":null"));
         assertTrue(response.getBody()
